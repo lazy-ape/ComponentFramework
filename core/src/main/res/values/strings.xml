@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">core</string>
+    <string name="load_more">加载中...</string>
+    <string name="load_end">--到底了--</string>
+</resources>

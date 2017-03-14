@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+    >
+    <LinearLayout android:id="@+id/layout_loading_data"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:gravity="center"
+                  android:orientation="horizontal"
+                  android:paddingTop="20dip"
+                  android:paddingBottom="20dip"
+                  android:visibility="gone"
+        >
+
+        <ProgressBar
+            android:id="@+id/gif_dialog"
+            android:layout_width="23dp"
+            android:layout_height="23dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:text="@string/load_more"
+            android:textSize="13sp"/>
+    </LinearLayout>
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/no_more_data"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dip"
+        android:text="@string/load_end"
+        android:gravity="center"
+        />
+</FrameLayout>

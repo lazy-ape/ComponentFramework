@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="retry_button_background">#30000000</color>
+    <color name="retry_button_background_stroke">#50000000</color>
+</resources>
