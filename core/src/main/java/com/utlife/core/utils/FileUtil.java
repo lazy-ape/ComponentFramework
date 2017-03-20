@@ -3,6 +3,7 @@ package com.utlife.core.utils;
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.os.Environment;
+import android.text.TextUtils;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -122,6 +123,22 @@ public class FileUtil {
     File file = new File(url);
     return file.exists();
   }
+
+  //获取保存文件的key
+  public static String getFileNameKey(String filePath){
+    String ext = "";
+    int index = filePath.lastIndexOf(".");
+    if(index > -1){
+      ext = filePath.substring(index + 1);
+    }
+    String fileName = SecurityUtils.md5(filePath + System.currentTimeMillis());
+    if(!TextUtils.isDigitsOnly(fileName)){
+      fileName = fileName + "." + ext;
+    }
+    return fileName;
+  }
+
+
 }
 
 

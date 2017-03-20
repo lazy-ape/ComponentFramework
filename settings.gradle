@@ -1,1 +1,1 @@
-include ':app', ':core', ':greedywallet'
+include ':app', ':core', ':greedywallet', ':imagepicker'

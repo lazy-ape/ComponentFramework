@@ -50,4 +50,17 @@ public class StringUtils {
         return  buf.toString();
     }
 
+
+    /**获取扩展名*/
+    public static String getExtByPath(String  path){
+        if(path != null) {
+            int index = path.lastIndexOf(".");
+            if(index >= 0 ){
+                return path.substring(index + 1);
+            }
+        }
+        return null;
+    }
+
+
 }
