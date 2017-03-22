@@ -81,42 +81,35 @@ public class UploadImageUtils {
 
     //压缩图片
     public void compressImage(ImageProvider data, Point imageSize, final CompressCallback callback){
-        try {
-            final File finalUrl = FileUtil.from(mContext, Uri.parse(data.getImagePath()));
-            Compressor compressor = null;
-            if(imageSize != null){
-                compressor = new Compressor.Builder(mContext)
-                        .setMaxHeight(imageSize.y)
-                        .setMaxWidth(imageSize.x)
-                        .setQuality(75)
-                        .setCompressFormat(Bitmap.CompressFormat.PNG)
-                        .build();
-            }else{
-                compressor = new Compressor.Builder(mContext)
-                        .setCompressFormat(Bitmap.CompressFormat.PNG)
-                        .setQuality(75)
-                        .build();
-            }
-            compressor.compressToFileAsObservable(finalUrl)
-                    .asObservable()
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new Action1<File>() {
-                        @Override
-                        public void call(File file) {
-                            callback.compressComplete(file.getAbsolutePath());
-                        }
-                    }, new Action1<Throwable>() {
-                        @Override
-                        public void call(Throwable throwable) {
-                            //出现异常直接上传
-                            callback.compressComplete(finalUrl.getAbsolutePath());
-                        }
-                    });
-        } catch (IOException e) {
-            e.printStackTrace();
-            callback.compressComplete(data.getImagePath());
+        final File finalUrl = new File(data.getImagePath());
+        Compressor compressor = null;
+        if (imageSize != null) {
+            compressor = new Compressor.Builder(mContext)
+                    .setMaxHeight(imageSize.y)
+                    .setMaxWidth(imageSize.x)
+                    .setQuality(75)
+                    .setCompressFormat(Bitmap.CompressFormat.JPEG)
+                    .build();
+        } else {
+            compressor = Compressor.getDefault(mContext);
         }
+        compressor.compressToFileAsObservable(finalUrl)
+                .asObservable()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<File>() {
+                    @Override
+                    public void call(File file) {
+                        callback.compressComplete(file.getAbsolutePath());
+                    }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+                        //出现异常直接上传
+                        callback.compressComplete(finalUrl.getAbsolutePath());
+                    }
+                });
+
     }
 
 

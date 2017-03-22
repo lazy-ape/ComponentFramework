@@ -11,7 +11,7 @@ import java.io.Serializable;
  * 修订历史：
  * ================================================
  */
-public class ImageItem implements Serializable {
+public class ImageItem implements Serializable{
 
     public String name;       //图片的名字
     public String path;       //图片的路径

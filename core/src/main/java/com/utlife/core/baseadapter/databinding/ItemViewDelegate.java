@@ -4,7 +4,7 @@ package com.utlife.core.baseadapter.databinding;
  * Created by xuqiang on 2016/12/22.
  */
 
-public interface ItemViewDelegate<T> {
+public interface ItemViewDelegate<T,H> {
     /**
      * item 的 layout id
      * @return
@@ -25,5 +25,13 @@ public interface ItemViewDelegate<T> {
      * @return
      */
     public abstract int getVariableId();
+
+    /**
+     * 更新数据
+     * @param holder
+     * @param item
+     * @param position
+     */
+    public abstract void covert(H holder, T item, int position);
 
 }

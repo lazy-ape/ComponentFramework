@@ -1,42 +1,32 @@
-package com.utlife.core.baseadapter.databinding.list;
+package com.utlife.core.baseadapter.normal.list;
 
 import android.content.Context;
-import android.databinding.DataBindingUtil;
-import android.databinding.ViewDataBinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 
-
-import com.utlife.core.baseadapter.databinding.ItemViewDelegate;
-import com.utlife.core.baseadapter.databinding.ItemViewDelegateManager;
+import com.utlife.core.baseadapter.ListViewHolder;
+import com.utlife.core.baseadapter.normal.ItemViewDelegate;
+import com.utlife.core.baseadapter.normal.ItemViewDelegateManager;
 
 import java.util.List;
 
-
-/**
- * Created by xuqiang on 2016/12/22.
- */
-
-public class MultiItemTypeListAdapter<T> extends BaseAdapter {
+public class MultiItemTypeAdapter<T> extends BaseAdapter {
     protected Context mContext;
     protected List<T> mDatas;
-    private LayoutInflater mInflater;
 
     private ItemViewDelegateManager mItemViewDelegateManager;
 
-    private ViewDataBinding mViewDataBinding;
 
-    public MultiItemTypeListAdapter(Context context, List<T> datas) {
+    public MultiItemTypeAdapter(Context context, List<T> datas) {
         this.mContext = context;
         this.mDatas = datas;
         mItemViewDelegateManager = new ItemViewDelegateManager();
-        mInflater = LayoutInflater.from(context);
     }
 
-    public MultiItemTypeListAdapter addItemViewDelegate(ItemViewDelegate itemViewDelegate) {
+    public MultiItemTypeAdapter addItemViewDelegate(ItemViewDelegate itemViewDelegate) {
         mItemViewDelegateManager.addDelegate(itemViewDelegate);
         return this;
     }
@@ -65,23 +55,31 @@ public class MultiItemTypeListAdapter<T> extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         ItemViewDelegate itemViewDelegate = mItemViewDelegateManager.getItemViewDelegate(mDatas.get(position), position);
         int layoutId = itemViewDelegate.getItemViewLayoutId();
+        ListViewHolder viewHolder = null ;
         if (convertView == null)
         {
-            mViewDataBinding = DataBindingUtil.inflate(mInflater,layoutId,parent,false);
-            convertView = mViewDataBinding.getRoot();
-            convertView.setTag(mViewDataBinding);
-
+            View itemView = LayoutInflater.from(mContext).inflate(layoutId, parent,
+                    false);
+            viewHolder = new ListViewHolder(mContext, itemView, parent, position);
+            viewHolder.mLayoutId = layoutId;
+            onViewHolderCreated(viewHolder,viewHolder.getConvertView());
         } else
         {
-           mViewDataBinding = (ViewDataBinding) convertView.getTag();
+            viewHolder = (ListViewHolder) convertView.getTag();
+            viewHolder.mPosition = position;
         }
 
-        mViewDataBinding.setVariable(itemViewDelegate.getVariableId(),getItem(position));
-        itemViewDelegate.covert(mViewDataBinding, getItem(position), position );
 
-        return convertView;
+        convert(viewHolder, getItem(position), position);
+        return viewHolder.getConvertView();
     }
 
+    protected void convert(ListViewHolder viewHolder, T item, int position) {
+        mItemViewDelegateManager.convert(viewHolder, item, position);
+    }
+
+    public void onViewHolderCreated(ListViewHolder holder , View itemView )
+    {}
 
     @Override
     public int getCount() {
@@ -97,4 +95,6 @@ public class MultiItemTypeListAdapter<T> extends BaseAdapter {
     public long getItemId(int position) {
         return position;
     }
+
+
 }

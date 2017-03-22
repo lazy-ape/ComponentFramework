@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.utlife.core.http.retrofit.RequestHelper;
 import com.utlife.core.ui.ProgressFragment;
 import com.utlife.core.utils.ResourceUtil;
 import com.utlife.core.widget.ProgressBarCircularIndeterminate;
@@ -37,7 +38,9 @@ public abstract class BaseFragment extends ProgressFragment {
    */
   public abstract void initData();
 
+  protected RequestHelper mRequestHelper;
   @Override public void onViewCreated(View view, Bundle savedInstanceState) {
+    mRequestHelper = new RequestHelper(getActivity());
     getBundle(getArguments());
     initUI(view);
     initData();

@@ -1,5 +1,6 @@
 package com.utlife.core;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -16,6 +17,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.utlife.core.http.retrofit.RequestHelper;
 import com.utlife.core.state.ContentState;
 import com.utlife.core.state.EmptyState;
 import com.utlife.core.state.ErrorState;
@@ -40,9 +42,13 @@ public abstract class BaseActivity extends AppCompatActivity {
           mCollectState;
   private Animation mAnimIn, mAnimOut;
   private ShowState mLastState = new NonState();
-
+  protected Activity mActivity;
+  protected RequestHelper mRequestHelper;
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    mRequestHelper = new RequestHelper(this);
+    mActivity = this;
+
     inflater = LayoutInflater.from(this);
     ViewGroup main = (ViewGroup) inflater.inflate(R.layout.epf_layout,null);
     setContentView(main);

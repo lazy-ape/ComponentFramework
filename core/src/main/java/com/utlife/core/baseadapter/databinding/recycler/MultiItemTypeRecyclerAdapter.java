@@ -62,6 +62,7 @@ public class MultiItemTypeRecyclerAdapter<T> extends RecyclerView.Adapter<MultiI
         ItemViewDelegate delegate = mItemViewDelegateManager.getItemViewDelegate(getItem(position),position);
         ViewDataBinding dataBinding = holder.getBinding();
         dataBinding.setVariable(delegate.getVariableId(),getItem(position));
+        delegate.covert(dataBinding,getItem(position),position);
     }
 
     @Override
@@ -78,12 +79,12 @@ public class MultiItemTypeRecyclerAdapter<T> extends RecyclerView.Adapter<MultiI
         return mDatas;
     }
 
-    public MultiItemTypeRecyclerAdapter addItemViewDelegate(ItemViewDelegate<T> itemViewDelegate) {
+    public MultiItemTypeRecyclerAdapter addItemViewDelegate(ItemViewDelegate itemViewDelegate) {
         mItemViewDelegateManager.addDelegate(itemViewDelegate);
         return this;
     }
 
-    public MultiItemTypeRecyclerAdapter addItemViewDelegate(int viewType, ItemViewDelegate<T> itemViewDelegate) {
+    public MultiItemTypeRecyclerAdapter addItemViewDelegate(int viewType, ItemViewDelegate itemViewDelegate) {
         mItemViewDelegateManager.addDelegate(viewType, itemViewDelegate);
         return this;
     }
