@@ -1,4 +1,4 @@
-package com.utlife.user.greedywallet;
+package com.lzy.imagepicker;
 
 import android.app.Activity;
 import android.widget.ImageView;
@@ -6,7 +6,6 @@ import android.widget.ImageView;
 import com.bumptech.glide.DrawableTypeRequest;
 import com.bumptech.glide.Glide;
 import com.lzy.imagepicker.loader.ImageLoader;
-import com.makeramen.roundedimageview.RoundedImageView;
 
 /**
  * Created by xuqiang on 2017/3/21.
@@ -15,14 +14,12 @@ import com.makeramen.roundedimageview.RoundedImageView;
 public class GlideImageLoader implements ImageLoader {
     @Override
     public void displayImage(Activity activity, String path, ImageView imageView, int width, int height) {
-        DrawableTypeRequest typeRequest = Glide.with(activity)
-                .load(path);
-        if(imageView instanceof RoundedImageView){
-            typeRequest.asBitmap();
-            typeRequest.into(imageView);
-        }else{
-            typeRequest.into(imageView);
-        }
+        Glide.with(activity)
+        .load(path)
+        .placeholder(R.mipmap.default_image)
+        .error(R.mipmap.default_image)
+        .into(imageView);
+
     }
 
     @Override

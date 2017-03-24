@@ -26,6 +26,7 @@ public abstract class BaseSubscriber<T> extends Subscriber<T> {
         if(!mIsNetworkAvailable){
             ToastUtils.showLong(context,"当前网络不可用，请检查网络");
             onCompleted();
+            return;
         }
     }
 

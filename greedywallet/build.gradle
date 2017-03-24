@@ -9,7 +9,9 @@ android {
     buildToolsVersion "25.0.2"
 
     defaultConfig {
-        applicationId "com.utlife.user.greedywallet"
+        if(isDebug.toBoolean()){
+            applicationId "com.utlife.user.greedywallet"
+        }
         minSdkVersion 15
         targetSdkVersion 25
         versionCode 1
@@ -51,4 +53,6 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile project(':core')
     compile project(':imagepicker')
+    compile project(':routercore')
+    annotationProcessor project(':compile')
 }

@@ -1,32 +1,23 @@
 package com.utlife.user.greedywallet;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
-import android.graphics.Color;
-import android.graphics.Point;
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.Transformation;
+import com.lzy.imagepicker.GlideImageLoader;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.Utils;
 import com.lzy.imagepicker.bean.ImageItem;
 import com.lzy.imagepicker.ui.ImageGridActivity;
-import com.makeramen.roundedimageview.RoundedTransformationBuilder;
 import com.utlife.core.BaseActivity;
 import com.utlife.core.baseadapter.RecyclerViewHolder;
 import com.utlife.core.baseadapter.normal.recycler.CommonAdapter;
@@ -39,7 +30,7 @@ import com.utlife.core.http.retrofit.BaseSubscriber;
 import com.utlife.core.http.retrofit.ExceptionHandle;
 import com.utlife.core.utils.PreferencesUtils;
 import com.utlife.user.greedywallet.api.UserApi;
-import com.utlife.user.greedywallet.databinding.ActivityMainBinding;
+import com.utlife.user.greedywallet.databinding.GwActivityMainBinding;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,12 +40,12 @@ public class MainActivity extends BaseActivity {
     public static final String PRE_QINIU_TOKEN = "pre_qiniu_token";
     private static final int CHOOSE_PICTURE = 1;
 
-    ActivityMainBinding activityMainBinding;
+    GwActivityMainBinding activityMainBinding;
     UserApi userApi;
 
     @Override
     public View onCreateContentView(LayoutInflater inflater) {
-        activityMainBinding = DataBindingUtil.inflate(inflater,R.layout.activity_main,null,false);
+        activityMainBinding = DataBindingUtil.inflate(inflater,R.layout.gw_activity_main,null,false);
         userApi = new UserApi(mRequestHelper);
         return activityMainBinding.getRoot();
     }
@@ -105,7 +96,7 @@ public class MainActivity extends BaseActivity {
         });
 
         activityMainBinding.recyclerview.setLayoutManager(new GridLayoutManager(mActivity,3));
-        commonAdapter = new CommonAdapter<String>(this,R.layout.image_item,imageData) {
+        commonAdapter = new CommonAdapter<String>(this,R.layout.gw_image_item,imageData) {
 
             @Override
             public RecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

@@ -1,1 +1,1 @@
-include ':app', ':core', ':greedywallet', ':imagepicker'
+include ':app', ':core', ':greedywallet', ':imagepicker', ':annotation', ':stub', ':routercore', ':compile'
