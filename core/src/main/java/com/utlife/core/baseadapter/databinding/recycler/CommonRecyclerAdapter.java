@@ -45,12 +45,15 @@ public class CommonRecyclerAdapter<T> extends MultiItemTypeRecyclerAdapter<T> {
 
             @Override
             public void covert(ViewDataBinding holder, T item, int position) {
-
+                convert(holder,item,position);
             }
 
 
         });
     }
 
+    public void convert(ViewDataBinding holder, T item, int position){
+
+    }
 
 }

@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.github.lzyzsd.jsbridge.BaseWebViewActivity;
 import com.lzy.imagepicker.GlideImageLoader;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.Utils;
@@ -65,7 +66,7 @@ public class MainActivity extends BaseActivity {
             public void run() {
                 showContent(false);
             }
-        },3500);
+        },1500);
         userApi.getToken()
                 .subscribe(new BaseSubscriber<BaseResponseData<String>>(this) {
                     @Override
@@ -114,7 +115,12 @@ public class MainActivity extends BaseActivity {
             }
         };
         activityMainBinding.recyclerview.setAdapter(commonAdapter);
-
+        activityMainBinding.btnOpenWeb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                BaseWebViewActivity.startActivity(MainActivity.this,"file:///android_asset/demo.html");
+            }
+        });
     }
 
     @Override

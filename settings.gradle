@@ -1,1 +1,1 @@
-include ':app', ':core', ':greedywallet', ':imagepicker', ':annotation', ':stub', ':routercore', ':compile'
+include ':app', ':core', ':greedywallet', ':imagepicker', ':annotation', ':stub', ':routercore', ':compile', ':JsBridge', ':commonbeanandresource'

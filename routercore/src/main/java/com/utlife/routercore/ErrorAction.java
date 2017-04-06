@@ -49,4 +49,9 @@ public class ErrorAction implements UtlifeAction {
         return "error";
     }
 
+    @Override
+    public Class<?> getParamBean() {
+        return Object.class;
+    }
+
 }

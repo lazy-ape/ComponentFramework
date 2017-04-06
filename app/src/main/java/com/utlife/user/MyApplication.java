@@ -9,7 +9,7 @@ import com.utlife.user.greedywallet.GreedyWalletApplicationLogic;
 /**
  * Created by xuqiang on 2017/3/24.
  */
-@Modules(modules = {"greedywallet"})
+@Modules(modules = {"main","imagePicker","greedywallet"})
 public class MyApplication extends UtlifeRouterApplication {
     @Override
     public void initializeAllProcessRouter() {

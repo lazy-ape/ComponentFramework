@@ -1,0 +1,14 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools"
+          package="com.github.lzyzsd.library">
+
+    <application android:allowBackup="true"
+                 android:label="@string/app_name"
+                 android:supportsRtl="true"
+                 tools:replace="android:theme"
+                 android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
+        >
+        <activity android:theme="@style/JsBridgeAppTheme" android:name="com.github.lzyzsd.jsbridge.BaseWebViewActivity"/>
+    </application>
+
+</manifest>

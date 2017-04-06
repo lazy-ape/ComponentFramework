@@ -35,5 +35,7 @@ dependencies {
     annotationProcessor project(':compile')
     if (!isDebug.toBoolean()) {
         compile project(':greedywallet')
+    }else{
+        compile project(':routercore')
     }
 }

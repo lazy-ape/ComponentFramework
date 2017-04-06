@@ -16,7 +16,6 @@ import java.util.List;
 public class ProcessUtil {
 
     public static final String UNKNOWN_PROCESS_NAME = "unknown_process_name";
-
     public static int getMyProcessId() {
         return android.os.Process.myPid();
     }

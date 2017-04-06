@@ -23,7 +23,8 @@ public class MainActivity extends AppCompatActivity {
                     LocalRouter.getInstance(UtlifeRouterApplication.getUtlifeRouterApplication())
                             .rxRoute(MainActivity.this, RouterRequestUtil.obtain(MainActivity.this)
                             .provider("greedywallet")
-                            .action("index"));
+                            .action("index")
+                            );
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

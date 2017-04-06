@@ -16,4 +16,6 @@ public interface UtlifeAction<T> {
     UtlifeActionResult invoke(Context context, RouterRequest<T> routerRequest);
 
     String getName();
+
+    Class<?> getParamBean();
 }

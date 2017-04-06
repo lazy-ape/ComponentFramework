@@ -7,6 +7,7 @@ import com.utlife.routercore.multiprocess.BaseApplicationLogic;
 /**
  * Created by wanglei on 2016/11/29.
  */
+@Module(name = "main")
 public class MainApplicationLogic extends BaseApplicationLogic {
     @Override
     public void onCreate() {

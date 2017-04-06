@@ -4,6 +4,8 @@ if (isDebug.toBoolean()) {
     apply plugin: 'com.android.library'
 }
 
+
+
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
@@ -54,5 +56,6 @@ dependencies {
     compile project(':core')
     compile project(':imagepicker')
     compile project(':routercore')
+    compile project(':JsBridge')
     annotationProcessor project(':compile')
 }

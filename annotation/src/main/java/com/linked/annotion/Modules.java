@@ -9,4 +9,5 @@ import java.lang.annotation.RetentionPolicy;
 @Retention(RetentionPolicy.CLASS)
 public @interface Modules {
     String[] modules();
+    boolean isIgnore() default false;
 }

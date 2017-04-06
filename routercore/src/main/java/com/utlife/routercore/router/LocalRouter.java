@@ -102,7 +102,8 @@ public class LocalRouter {
     }
 
     boolean answerWiderAsync(@NonNull RouterRequest routerRequest) {
-        if (mProcessName.equals(routerRequest.getDomain()) && checkWideRouterConnection()) {
+        if (mProcessName.equals(routerRequest.getDomain())
+                && checkWideRouterConnection()) {
             return findRequestAction(routerRequest).isAsync(mApplication, routerRequest);
         } else {
             return true;
@@ -228,7 +229,7 @@ public class LocalRouter {
         }
     }
 
-    private UtlifeAction findRequestAction(RouterRequest routerRequest) {
+    public UtlifeAction findRequestAction(RouterRequest routerRequest) {
         UtlifeProvider targetProvider = mProviders.get(routerRequest.getProvider());
         ErrorAction defaultNotFoundAction = new ErrorAction(false, UtlifeActionResult.CODE_NOT_FOUND, "Not found the action.");
         if (null == targetProvider) {

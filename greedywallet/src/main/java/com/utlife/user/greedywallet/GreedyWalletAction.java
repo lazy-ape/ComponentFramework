@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.linked.annotion.Action;
+import com.utlife.commonbeanandresource.bean.ProcessConfig;
 import com.utlife.routercore.UtlifeAction;
 import com.utlife.routercore.router.RouterRequest;
 import com.utlife.routercore.router.UtlifeActionResult;
@@ -12,7 +13,7 @@ import com.utlife.routercore.router.UtlifeActionResult;
 /**
  * Created by xuqiang on 2017/3/24.
  */
-@Action(processName = "com.utlife.user", providerName = "greedywallet")
+@Action(processName = ProcessConfig.MAIN_PROCESS_NAME, providerName = "greedywallet")
 public class GreedyWalletAction implements UtlifeAction {
     @Override
     public boolean isAsync(Context context, RouterRequest routerRequest) {
@@ -35,5 +36,10 @@ public class GreedyWalletAction implements UtlifeAction {
     @Override
     public String getName() {
         return "index";
+    }
+
+    @Override
+    public Class<?> getParamBean() {
+        return null;
     }
 }

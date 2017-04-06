@@ -70,7 +70,9 @@ public class ActionPrecessor extends AbstractProcessor {
                 if (!modulesList.isEmpty()) {
                     Element element = modulesList.iterator().next();
                     Modules modules = element.getAnnotation(Modules.class);
-                    generateModulesProviderMappingInit(modules.modules());
+                    if(!modules.isIgnore()){
+                        generateModulesProviderMappingInit(modules.modules());
+                    }
                 } else if (moduleList.isEmpty()) {
                     generateDefaultProviderMappingInit();
                 } else if (moduleList.size() > 1) {
@@ -95,7 +97,7 @@ public class ActionPrecessor extends AbstractProcessor {
                 .returns(TypeName.VOID)
                 .addParameter(HashMap.class, "providerMap")
                 .addParameter(HashMap.class, "actionMap");
-        initBuilder.addStatement("ProviderMappingInit.init(providerMap, actionMap)");
+        //initBuilder.addStatement("ProviderMappingInit.init(providerMap, actionMap)");
         TypeSpec providerInit = TypeSpec.classBuilder("ProviderInit")
                 .addModifiers(Modifier.PUBLIC)
                 .addMethod(initBuilder.build())
@@ -114,8 +116,8 @@ public class ActionPrecessor extends AbstractProcessor {
                 .addModifiers(Modifier.PUBLIC, Modifier.STATIC)
                 .returns(TypeName.VOID)
                 .addParameter(HashMap.class, "providerMap")
-                .addParameter(HashMap.class, "actionMap")
-                .addStatement("ProviderMappingInit.init(providerMap, actionMap)");
+                .addParameter(HashMap.class, "actionMap");
+                //.addStatement("ProviderMappingInit.init(providerMap, actionMap)");
         for (String moduleName : modules) {
             initBuilder.addStatement("ProviderMappingInit_" + moduleName + ".init(providerMap, actionMap)");
         }
