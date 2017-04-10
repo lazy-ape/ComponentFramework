@@ -7,6 +7,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -16,14 +17,21 @@ import android.widget.GridView;
 
 import com.lzy.imagepicker.ImageDataSource;
 import com.lzy.imagepicker.ImagePicker;
+import com.lzy.imagepicker.ImagePickerAction;
 import com.lzy.imagepicker.R;
 import com.lzy.imagepicker.adapter.ImageFolderAdapter;
 import com.lzy.imagepicker.adapter.ImageGridAdapter;
 import com.lzy.imagepicker.bean.ImageFolder;
-import com.lzy.imagepicker.bean.ImageItem;
 import com.lzy.imagepicker.view.FolderPopUpWindow;
+import com.utlife.commonbeanandresource.bean.ImageItem;
+import com.utlife.routercore.action.EventAsyncChoosePictureResult;
+import com.utlife.routercore.action.EventAsyncRouterResult;
+import com.utlife.routercore.router.UtlifeActionResult;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import xiaofei.library.hermeseventbus.HermesEventBus;
 
 /**
  * ================================================
@@ -52,10 +60,16 @@ public class ImageGridActivity extends ImageBaseActivity implements ImageDataSou
     private List<ImageFolder> mImageFolders;   //所有的图片文件夹
     private ImageGridAdapter mImageGridAdapter;  //图片九宫格展示的适配器
 
+    private String mWebRequestId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image_grid);
+
+        Intent dataIntent = getIntent();
+        if(dataIntent != null && dataIntent.hasExtra(ImagePickerAction.WEB_REQUEST_ID)){
+            mWebRequestId = dataIntent.getStringExtra(ImagePickerAction.WEB_REQUEST_ID);
+        }
 
         imagePicker = ImagePicker.getInstance();
         imagePicker.clear();
@@ -123,6 +137,7 @@ public class ImageGridActivity extends ImageBaseActivity implements ImageDataSou
             Intent intent = new Intent();
             intent.putExtra(ImagePicker.EXTRA_RESULT_ITEMS, imagePicker.getSelectedImages());
             setResult(ImagePicker.RESULT_CODE_ITEMS, intent);  //多选不允许裁剪裁剪，返回数据
+            sendImagePickerEvent(imagePicker.getSelectedImages());
             finish();
         } else if (id == R.id.btn_dir) {
             if (mImageFolders == null) {
@@ -204,6 +219,7 @@ public class ImageGridActivity extends ImageBaseActivity implements ImageDataSou
                 Intent intent = new Intent();
                 intent.putExtra(ImagePicker.EXTRA_RESULT_ITEMS, imagePicker.getSelectedImages());
                 setResult(ImagePicker.RESULT_CODE_ITEMS, intent);   //单选不需要裁剪，返回数据
+                sendImagePickerEvent(imagePicker.getSelectedImages());
                 finish();
             }
         }
@@ -238,6 +254,7 @@ public class ImageGridActivity extends ImageBaseActivity implements ImageDataSou
                 } else {
                     //说明是从裁剪页面过来的数据，直接返回就可以
                     setResult(ImagePicker.RESULT_CODE_ITEMS, data);
+                    sendImagePickerEvent((ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS));
                     finish();
                 }
             }
@@ -257,9 +274,21 @@ public class ImageGridActivity extends ImageBaseActivity implements ImageDataSou
                     Intent intent = new Intent();
                     intent.putExtra(ImagePicker.EXTRA_RESULT_ITEMS, imagePicker.getSelectedImages());
                     setResult(ImagePicker.RESULT_CODE_ITEMS, intent);   //单选不需要裁剪，返回数据
+                    sendImagePickerEvent(imagePicker.getSelectedImages());
                     finish();
                 }
             }
         }
     }
+
+    //发送选择的照片
+    private void sendImagePickerEvent(ArrayList<ImageItem> imageItems){
+        if(!TextUtils.isEmpty(mWebRequestId)){
+            EventAsyncChoosePictureResult routerResult = new EventAsyncChoosePictureResult();
+            routerResult.requestId = mWebRequestId;
+            routerResult.itemsResult = imageItems;
+            HermesEventBus.getDefault().post(routerResult);
+        }
+    }
+
 }

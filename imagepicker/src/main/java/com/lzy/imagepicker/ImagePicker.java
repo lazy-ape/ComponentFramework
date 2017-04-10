@@ -11,9 +11,9 @@ import android.os.Environment;
 import android.provider.MediaStore;
 
 import com.lzy.imagepicker.bean.ImageFolder;
-import com.lzy.imagepicker.bean.ImageItem;
 import com.lzy.imagepicker.loader.ImageLoader;
 import com.lzy.imagepicker.view.CropImageView;
+import com.utlife.commonbeanandresource.bean.ImageItem;
 
 import java.io.File;
 import java.text.SimpleDateFormat;

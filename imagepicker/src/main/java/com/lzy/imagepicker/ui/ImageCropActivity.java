@@ -12,8 +12,8 @@ import android.widget.Toast;
 
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.R;
-import com.lzy.imagepicker.bean.ImageItem;
 import com.lzy.imagepicker.view.CropImageView;
+import com.utlife.commonbeanandresource.bean.ImageItem;
 
 import java.io.File;
 import java.util.ArrayList;

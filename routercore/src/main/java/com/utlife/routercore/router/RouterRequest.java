@@ -19,6 +19,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class RouterRequest<T> implements Parcelable {
     static AtomicInteger sIndex = new AtomicInteger(0);
 
+    String id;
     String from;
     String domain;
     String provider;
@@ -34,6 +35,7 @@ public class RouterRequest<T> implements Parcelable {
         this.provider = "";
         this.action = "";
         this.data = new HashMap<>();
+        this.id = "";
     }
 
 
@@ -43,9 +45,11 @@ public class RouterRequest<T> implements Parcelable {
         this.provider = "";
         this.action = "";
         this.data = new HashMap<>();
+        this.id = "";
     }
 
     protected RouterRequest(Parcel in) {
+        id = in.readString();
         from = in.readString();
         domain = in.readString();
         provider = in.readString();
@@ -77,6 +81,8 @@ public class RouterRequest<T> implements Parcelable {
             return new RouterRequest[size];
         }
     };
+
+    public String getId(){return id;}
 
     public String getFrom() {
         return from;
@@ -125,6 +131,11 @@ public class RouterRequest<T> implements Parcelable {
         return jsonObject.toString();
     }
 
+    public RouterRequest id(String id){
+        this.id = id;
+        return this;
+    }
+
     public RouterRequest domain(String domain) {
         this.domain = domain;
         return this;
@@ -159,6 +170,7 @@ public class RouterRequest<T> implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(id);
         dest.writeString(from);
         dest.writeString(domain);
         dest.writeString(provider);

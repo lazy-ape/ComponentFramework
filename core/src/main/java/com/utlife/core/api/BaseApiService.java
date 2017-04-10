@@ -22,7 +22,7 @@ import rx.schedulers.Schedulers;
 
 public class BaseApiService {
 
-    public static final String base_url = "http://192.168.60.42";
+    public static final String base_url = "http://192.168.56.22";
     protected OkHttpClient mOKOkHttpClient;
     protected RequestHelper mRequestHelper;
     protected Retrofit mRetrofit;

@@ -6,6 +6,7 @@ import android.graphics.Point;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.qiniu.android.common.Zone;
@@ -120,6 +121,10 @@ public class UploadImageUtils {
      */
     public void uploadImage(final ImageProvider data,
                             final UploadImageCallback<UploadImageCallbackModel> callback,boolean needCompress, Point imageSize){
+        if(TextUtils.isEmpty(mToken)){
+            throw new RuntimeException("七牛 token 未被初始化");
+        }
+
         if(needCompress){
             compressImage(data, imageSize, new CompressCallback() {
                 @Override
@@ -180,6 +185,11 @@ public class UploadImageUtils {
      * @param callback  上传图片的回调
      */
     public void uploadImageByMultiThread(List<? extends ImageProvider> filePaths, final boolean needCompress, final Point imageSize, final UploadImageCallback callback){
+
+        if(TextUtils.isEmpty(mToken)){
+            throw new RuntimeException("七牛 token 未被初始化");
+        }
+
         mMultiUploadCallback = callback;
 
         mUploadImages = initUploadImageData(filePaths);

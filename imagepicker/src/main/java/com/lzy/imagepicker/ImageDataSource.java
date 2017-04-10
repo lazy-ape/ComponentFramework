@@ -9,7 +9,7 @@ import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 
 import com.lzy.imagepicker.bean.ImageFolder;
-import com.lzy.imagepicker.bean.ImageItem;
+import com.utlife.commonbeanandresource.bean.ImageItem;
 
 import java.io.File;
 import java.util.ArrayList;

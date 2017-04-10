@@ -32,5 +32,7 @@ dependencies {
     provided project(':stub')
     compile 'io.reactivex:rxandroid:1.2.1'
     compile 'io.reactivex:rxjava:1.2.0'
+    compile 'xiaofei.library:hermes-eventbus:0.3.0'
     compile project(':annotation')
+    compile project(':commonbeanandresource')
 }

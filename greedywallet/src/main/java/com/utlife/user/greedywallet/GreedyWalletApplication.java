@@ -7,11 +7,20 @@ import com.utlife.routercore.UtlifeRouterApplication;
 import com.utlife.routercore.router.WideRouter;
 import com.utlife.routercore.tools.ProcessUtil;
 
+import xiaofei.library.hermeseventbus.HermesEventBus;
+
 /**
  * Created by xuqiang on 2017/3/30.
  */
 @Modules(modules = {"greedywallet","imagePicker"})
 public class GreedyWalletApplication extends UtlifeRouterApplication {
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        HermesEventBus.getDefault().init(this);
+    }
+
     @Override
     public void initializeAllProcessRouter() {
         WideRouter.registerLocalRouter("com.utlife.user.greedywallet",GreedyWalletRouterConnectService.class);

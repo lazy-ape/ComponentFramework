@@ -13,8 +13,8 @@ import com.lzy.imagepicker.R;
 import com.lzy.imagepicker.Utils;
 import com.lzy.imagepicker.adapter.ImagePageAdapter;
 import com.lzy.imagepicker.bean.ImageFolder;
-import com.lzy.imagepicker.bean.ImageItem;
 import com.lzy.imagepicker.view.ViewPagerFixed;
+import com.utlife.commonbeanandresource.bean.ImageItem;
 
 import java.util.ArrayList;
 import java.util.List;

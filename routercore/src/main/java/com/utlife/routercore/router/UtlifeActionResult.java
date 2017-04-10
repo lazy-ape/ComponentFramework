@@ -18,6 +18,7 @@ public class UtlifeActionResult<T> implements Parcelable {
     public static final int CODE_CANNOT_BIND_WIDE = 0X0007;
     public static final int CODE_TARGET_IS_WIDE = 0X0008;
     public static final int CODE_WIDE_STOPPING = 0X0009;
+    public static final int CODE_NEED_ASYNC_CALLBACK = 0X0010;//用于标记需要异步回调，需要使用eventbus传递结果时使用该标记
 
     private int code;
     private String msg;

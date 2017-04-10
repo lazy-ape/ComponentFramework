@@ -1,5 +1,7 @@
 package com.lzy.imagepicker.bean;
 
+import com.utlife.commonbeanandresource.bean.ImageItem;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
