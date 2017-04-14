@@ -12,7 +12,7 @@ import xiaofei.library.hermeseventbus.HermesEventBus;
 /**
  * Created by xuqiang on 2017/3/30.
  */
-@Modules(modules = {"greedywallet","imagePicker"})
+@Modules(modules = {"greedywallet","imagePicker"},isIgnore = true)
 public class GreedyWalletApplication extends UtlifeRouterApplication {
 
     @Override

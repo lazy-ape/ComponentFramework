@@ -114,10 +114,10 @@ public class BaseWebViewActivity  extends AppCompatActivity{
                 if(jsonObject.has("domain")){
                     domain = jsonObject.getString("domain");
                 }
-                String   provider = jsonObject.getString("provider");
+                String provider = jsonObject.getString("provider");
                 String action = jsonObject.getString("action");
                 String params = "";
-                if(jsonObject.has(params)){
+                if (jsonObject.has(params)) {
                     params = jsonObject.getString("params");
                 }
                 final String requestId = BridgeUtil.getMD5(data + System.currentTimeMillis());

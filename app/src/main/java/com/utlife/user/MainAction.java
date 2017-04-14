@@ -26,4 +26,9 @@ public class MainAction implements UtlifeAction {
     public String getName() {
         return "main";
     }
+
+    @Override
+    public Class<?> getParamBean() {
+        return Object.class;
+    }
 }
